@@ -31,7 +31,7 @@ public final class Rules {
     /** Sales close this many seconds before each draw. */
     public static final int SALES_CLOSE_SECONDS = 5;
     public static final int DEFAULT_DRAW_SECONDS = 300;
-    public static final int MAX_QUICK_PICKS = 45000;
+    public static final int MAX_QUICK_PICKS = 100;
     public static final int LIST_LIMIT = 200;
 
     // ---------------------------------------------------------------- accounts
