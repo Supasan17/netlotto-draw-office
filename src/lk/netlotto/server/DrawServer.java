@@ -45,8 +45,10 @@ public final class DrawServer implements DrawOffice.Hub {
     private final int secondsPerDraw;
     private final Store store;
     private final DrawOffice office;
-    private final ExecutorService readers = Executors.newFixedThreadPool(Rules.MAX_SESSIONS, named("desk-reader"));
-    private final ExecutorService writers = Executors.newFixedThreadPool(Rules.MAX_SESSIONS, named("desk-writer"));
+    private final ExecutorService readers = Executors.newFixedThreadPool(         ////////////////reader thread pool eka start karanawa, desk ekak connect unaama reader thread eka denna
+        Rules.MAX_SESSIONS, named("desk-reader"));
+    private final ExecutorService writers = Executors.newFixedThreadPool(         /////////////writer thread pool eka start karanawa, desk ekak connect unaama writer thread eka denna
+        Rules.MAX_SESSIONS, named("desk-writer"));
     private final Set<Session> sessions = ConcurrentHashMap.newKeySet();
     /** Account id -> its session. One account can be signed in on one desk at a time. */
     private final Map<Integer, Session> signedIn = new ConcurrentHashMap<>();
@@ -100,9 +102,9 @@ public final class DrawServer implements DrawOffice.Hub {
                     + "Is another server already running? (" + e.getMessage() + ")");
             return;
         }
-        Runtime.getRuntime().addShutdownHook(new Thread(server::shutdown, "shutdown"));
+        Runtime.getRuntime().addShutdownHook(new Thread(server::shutdown, "shutdown")); //////////////shutdown hook eka register karanawa, main thread eka close unaama shutdown() method eka call karanawa
         try {
-            server.start();
+            server.start();           //////////////////////start() call karanawa, acceptor,draw-clock,beacon thread start karanawa
         } catch (IOException e) {
             server.shutdown();
             startupFailed(consoleOnly, "Cannot listen on TCP port " + port + ": " + e.getMessage()
@@ -183,7 +185,7 @@ public final class DrawServer implements DrawOffice.Hub {
         office.start();
         beacon = new Beacon(port, this::online);
         beacon.start();
-        Thread acceptor = new Thread(this::acceptLoop, "acceptor");
+        Thread acceptor = new Thread(this::acceptLoop, "acceptor");               ////////////accceptor thread eka start karanawa, acceptLoop() method eka run karanawa
         acceptor.setDaemon(true);
         acceptor.start();
         Log.info("NetLotto Draw Office listening on TCP " + port + ", beacon on UDP " + Rules.BEACON_PORT + ".");
@@ -203,7 +205,7 @@ public final class DrawServer implements DrawOffice.Hub {
                 Session s = new Session(socket, this);
                 sessions.add(s);
                 Log.info("Desk connected from " + s.peer() + " (" + sessions.size() + " connected).");
-                readers.execute(s);
+                readers.execute(s);                                           ////////////////////////desk ekak connect unaama reader thread eka denna
             } catch (SocketException e) {
                 return; // listener closed during shutdown
             } catch (IOException e) {
@@ -439,7 +441,7 @@ public final class DrawServer implements DrawOffice.Hub {
 
     private final java.util.concurrent.atomic.AtomicBoolean stopped = new java.util.concurrent.atomic.AtomicBoolean();
 
-    private void shutdown() {
+    private void shutdown() {                /////////shutdown karanawa, acceptor,draw-clock,beacon thread stop karanawa, desk ekak connect unaama reader/writer thread stop karanawa
         if (!stopped.compareAndSet(false, true)) {
             return;
         }

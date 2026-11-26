@@ -44,7 +44,7 @@ final class Beacon implements Runnable {
     }
 
     void start() {
-        thread = new Thread(this, "beacon");
+        thread = new Thread(this, "beacon");        /////////////////beacon thread eka start karanawa, run() method eka run karanawa
         thread.setDaemon(true);
         thread.start();
     }
@@ -57,7 +57,7 @@ final class Beacon implements Runnable {
     }
 
     @Override
-    public void run() {
+    public void run() {                          //////////////////////beacon thread eka run karanawa, UDP datagram send karanawa
         try (DatagramSocket socket = new DatagramSocket()) {
             socket.setBroadcast(true);
             while (running) {

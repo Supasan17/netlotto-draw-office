@@ -18,7 +18,7 @@ then exactly one `OK` or `FAIL`, all with the same `ref`. Requests may be pipeli
 | `SIGNUP` | `user`, `password` | `OK user account balance` |
 | `SIGNIN` | `user`, `password` | `OK user account balance` |
 | `BUY` | `numbers` (comma separated, 6 values) | `OK ticket draw numbers balance at` |
-| `QUICKPICK` | `count` (1–5) | `ROW ticket draw numbers at` per ticket, then `OK count balance` |
+| `QUICKPICK` | `count` (1–100) | `ROW ticket draw numbers at` per ticket, then `OK count balance` |
 | `TICKETS` | – | `ROW ticket draw numbers status matches prize at` per ticket, then `OK rows` |
 | `STATEMENT` | – | `ROW entry type amount balance reference text at` per entry, then `OK rows balance` |
 | `RESULTS` | – | `ROW draw numbers sold winners jackpotWon at` per draw, then `OK rows` |
@@ -54,7 +54,7 @@ then exactly one `OK` or `FAIL`, all with the same `ref`. Requests may be pipeli
 ## Example
 
 ```
-S: HELLO server=NetLotto+Draw+Office version=2 pick=6 highest=40 price=20 maxQuick=5
+S: HELLO server=NetLotto+Draw+Office version=2 pick=6 highest=40 price=20 maxQuick=100
 D: SIGNIN ref=1 user=kasun password=ruhuna2026
 S: OK ref=1 user=kasun account=3 balance=500
 S: CLOCK draw=12 phase=OPEN secs=41 jackpot=5230 sold=14 online=3

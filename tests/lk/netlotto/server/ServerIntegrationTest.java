@@ -209,7 +209,7 @@ public final class ServerIntegrationTest {
             r = bob.request(rows, Frames.QUICK_PICK, "count", 3);
             Check.equal(3, rows.size(), "quick pick returns three tickets");
             Check.equal(Rules.OPENING_BALANCE - 3 * Rules.TICKET_PRICE, r.getInt("balance", -1), "quick pick charges three tickets");
-            r = bob.request(Frames.QUICK_PICK, "count", 9);
+            r = bob.request(Frames.QUICK_PICK, "count", Rules.MAX_QUICK_PICKS + 1);
             Check.equal(Frames.E_INVALID, r.get("code"), "quick pick above the limit is refused");
 
             server.drawNow();

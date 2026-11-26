@@ -24,11 +24,11 @@ It uses `JAVA_HOME` if set, otherwise the `javac` on PATH.
 Ready-built JARs are already in `dist\`. They can be started from PowerShell or by double-clicking:
 
 ```powershell
-# Draw server with its window: TCP port 6060, a draw every 60 seconds (both optional)
-java -jar dist/drawoffice-server.jar 6060 60
+# Draw server with its window: TCP port 6060, a draw every 5 minutes (both optional)
+java -jar dist/drawoffice-server.jar 6060 300
 
 # Draw server without a window (text console only)
-java -jar dist/drawoffice-server.jar --console 6060 60
+java -jar dist/drawoffice-server.jar --console 6060 300
 
 # Desk (client): run one per computer, or several on one computer
 java -jar dist/drawoffice-desk.jar
@@ -70,7 +70,7 @@ without Java (`packages\DrawOffice-desk-windows.zip`).
    a letter; passwords are 8–64 characters with at least one letter and one digit.
 3. **Overview** shows the current draw, countdown, jackpot, tickets sold, desks online, the latest
    result, recent tickets and a live activity feed.
-4. **Buy tickets**: choose 6 numbers from 1–40 and buy (20 points), or buy 1–5 quick pick tickets
+4. **Buy tickets**: choose 6 numbers from 1–40 and buy (20 points), or buy 1–100 quick pick tickets
    with random unsold combinations.
 5. **My tickets**, **Statement** and **Draw results** show the stored history.
 
@@ -81,7 +81,7 @@ without Java (`packages\DrawOffice-desk-windows.zip`).
 | Numbers per ticket | 6 different numbers from 1 to 40 |
 | Ticket price | 20 points (10 of which go to the jackpot) |
 | Opening balance | 500 points |
-| Draw cycle | every 60 s by default; sales close 5 s before the draw |
+| Draw cycle | every 5 minutes (300 s) by default; sales close 5 s before the draw |
 | Prize by numbers matched | 1 = 20, 2 = 50, 3 = 100, 4 = 1,000, 5 = 5,000 points: each extra match pays more |
 | 6 matches | share the jackpot (starts at 50,000 points, grows by 10 per ticket, carried forward when not won) |
 | Uniqueness | a combination can be sold only once per draw |

@@ -256,7 +256,7 @@ final class ServerWindow extends JFrame {
         notice.setOpaque(false);
         noticeField.setToolTipText("Message shown on every signed-in desk");
         Btn send = new Btn("Send notice", Btn.Kind.SECONDARY);
-        Runnable sendNotice = () -> {
+        Runnable sendNotice = () -> {                             //////send notice button eka click karanawa, desk ekata notice send karanawa
             String text = noticeField.getText().trim();
             if (!text.isEmpty()) {
                 server.sendNotice(text);

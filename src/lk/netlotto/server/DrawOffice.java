@@ -55,8 +55,8 @@ final class DrawOffice {
     private final SecureRandom random = new SecureRandom();
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
     private final ScheduledExecutorService clock = Executors.newSingleThreadScheduledExecutor(r -> {
-        Thread t = new Thread(r, "draw-clock");
-        t.setDaemon(true);
+        Thread t = new Thread(r, "draw-clock");            //////////////draw-clock thread eka start karanawa, tick() method eka run karanawa
+        t.setDaemon(true);                                 ///////// daemon thread eka, main thread eka close unaama e thread eka close wenawa
         return t;
     });
 
