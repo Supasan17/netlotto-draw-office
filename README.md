@@ -18,7 +18,7 @@ Requires JDK 17 or newer. From PowerShell in the project folder:
 ```
 
 The script compiles the sources with `--release 17 -Xlint:all`, creates the runnable JARs in `dist\`,
-copies the H2 driver to `dist\lib\` and runs all four test suites. Use `-SkipTests` to build only.
+copies the H2 driver to `dist\lib\` and runs all five test suites. Use `-SkipTests` to build only.
 It uses `JAVA_HOME` if set, otherwise the `javac` on PATH.
 
 Ready-built JARs are already in `dist\`. They can be started from PowerShell or by double-clicking:
